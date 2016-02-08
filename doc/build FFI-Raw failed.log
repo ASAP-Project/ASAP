@@ -1,0 +1,294 @@
+cpanm (App::cpanminus) 1.7039 on perl 5.020002 built for MSWin32-x64-multi-thread
+Work directory is C:\Users\Brain/.cpanm/work/1451930511.14232
+You have make C:\Perl64\site\bin\dmake.exe
+You have LWP 6.13
+Falling back to Archive::Tar 2.04
+Searching FFI::Raw () on cpanmetadb ...
+--> Working on FFI::Raw
+Fetching http://www.cpan.org/authors/id/A/AL/ALEXBIO/FFI-Raw-0.32.tar.gz
+-> OK
+Unpacking FFI-Raw-0.32.tar.gz
+Entering FFI-Raw-0.32
+Checking configure dependencies from META.json
+Checking if you have Devel::CheckLib 0 ... Yes (1.05)
+Checking if you have ExtUtils::MakeMaker 6.58 ... Yes (6.98)
+Configuring FFI-Raw-0.32
+Running Makefile.PL
+Checking if your kit is complete...
+Looks good
+Warning (mostly harmless): No library found for -lpsapi
+Warning (mostly harmless): No library found for -lmoldname
+Warning (mostly harmless): No library found for -lkernel32
+Warning (mostly harmless): No library found for -luser32
+Warning (mostly harmless): No library found for -lgdi32
+Warning (mostly harmless): No library found for -lwinspool
+Warning (mostly harmless): No library found for -lcomdlg32
+Warning (mostly harmless): No library found for -ladvapi32
+Warning (mostly harmless): No library found for -lshell32
+Warning (mostly harmless): No library found for -lole32
+Warning (mostly harmless): No library found for -loleaut32
+Warning (mostly harmless): No library found for -lnetapi32
+Warning (mostly harmless): No library found for -luuid
+Warning (mostly harmless): No library found for -lws2_32
+Warning (mostly harmless): No library found for -lmpr
+Warning (mostly harmless): No library found for -lwinmm
+Warning (mostly harmless): No library found for -lversion
+Warning (mostly harmless): No library found for -lodbc32
+Warning (mostly harmless): No library found for -lodbccp32
+Warning (mostly harmless): No library found for -lcomctl32
+Generating a dmake-style Makefile
+Writing Makefile for FFI::Raw
+Writing MYMETA.yml and MYMETA.json
+-> OK
+Checking dependencies from MYMETA.json ...
+Checking if you have File::Basename 0 ... Yes (2.85)
+Checking if you have overload 0 ... Yes (1.22)
+Checking if you have File::Temp 0 ... Yes (0.2304)
+Checking if you have Env 0 ... Yes (1.04)
+Checking if you have File::Spec 0 ... Yes (3.48_01)
+Checking if you have File::Copy 0 ... Yes (2.30)
+Checking if you have Alien::MSYS 0 ... Yes (0.07)
+Checking if you have POSIX 0 ... Yes (1.38_03)
+Checking if you have IO::Handle 0 ... Yes (1.35)
+Checking if you have Math::BigInt 0 ... Yes (1.9993)
+Checking if you have strict 0 ... Yes (1.08)
+Checking if you have Text::ParseWords 0 ... Yes (3.30)
+Checking if you have warnings 0 ... Yes (1.23)
+Checking if you have IPC::Open3 0 ... Yes (1.16)
+Checking if you have bigint 0 ... Yes (0.36)
+Checking if you have lib 0 ... Yes (0.63)
+Checking if you have XSLoader 0 ... Yes (0.17)
+Checking if you have Test::More 0 ... Yes (1.001014)
+Checking if you have ExtUtils::CBuilder 0 ... Yes (0.280223)
+Checking if you have base 0 ... Yes (2.22)
+Checking if you have FindBin 0 ... Yes (1.51)
+Building and testing FFI-Raw-0.32
+cp lib/FFI/Raw/Ptr.pm blib\lib\FFI\Raw\Ptr.pm
+cp lib/FFI/Raw/Callback.pm blib\lib\FFI\Raw\Callback.pm
+cp lib/FFI/Raw.pm blib\lib\FFI\Raw.pm
+cp lib/FFI/Raw/MemPtr.pm blib\lib\FFI\Raw\MemPtr.pm
+C:\Perl64\bin\perl.exe -MAlien::MSYS=msys_run -Minc::MSYSConfigure -e "configure(); msys_run 'make'"
+sh configure MAKEILFO=true --disable-builddir --with-pic --build=x86_64-pc-mingw64
+checking build system type... x86_64-pc-mingw64
+checking host system type... x86_64-pc-mingw64
+checking target system type... x86_64-pc-mingw64
+checking for gsed... sed
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /usr/bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports nested variables... yes
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.exe
+checking for suffix of executables... .exe
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for style of include used by make... GNU
+checking dependency style of gcc... gcc3
+checking dependency style of gcc... gcc3
+checking whether gcc and cc understand -c and -o together... yes
+checking how to print strings... printf
+checking for a sed that does not truncate output... /usr/bin/sed
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking for fgrep... /usr/bin/grep -F
+checking for ld used by gcc... c:/perl64/site/lib/auto/mingw/x86_64-w64-mingw32/bin/ld.exe
+checking if the linker (c:/perl64/site/lib/auto/mingw/x86_64-w64-mingw32/bin/ld.exe) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... no
+checking for dumpbin... no
+checking for link... no
+checking the name lister (nm) interface... BSD nm
+checking whether ln -s works... no, using cp -pR
+checking the maximum length of command line arguments... 8192
+checking whether the shell understands some XSI constructs... yes
+checking whether the shell understands "+="... yes
+checking how to convert x86_64-pc-mingw64 file names to x86_64-pc-mingw64 format... func_convert_file_msys_to_w32
+checking how to convert x86_64-pc-mingw64 file names to toolchain format... func_convert_file_msys_to_w32
+checking for c:/perl64/site/lib/auto/mingw/x86_64-w64-mingw32/bin/ld.exe option to reload object files... -r
+checking for objdump... no
+checking how to recognize dependent libraries... file_magic ^x86 archive import|^x86 DLL
+checking for dlltool... dlltool
+checking how to associate runtime and link libraries... func_cygming_dll_for_implib
+checking for ar... ar
+checking for archiver @FILE support... @
+checking for strip... no
+checking for ranlib... no
+checking command to parse nm output from gcc object... failed
+checking for sysroot... no
+checking for mt... no
+checking if : is a manifest tool... no
+checking how to run the C preprocessor... gcc -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking for dlfcn.h... no
+checking for objdir... .libs
+checking if gcc supports -fno-rtti -fno-exceptions... no
+checking for gcc option to produce PIC... -DDLL_EXPORT -DPIC
+checking if gcc PIC flag -DDLL_EXPORT -DPIC works... yes
+checking if gcc static flag -static works... yes
+checking if gcc supports -c -o file.o... yes
+checking if gcc supports -c -o file.o... (cached) yes
+checking whether the gcc linker (c:/perl64/site/lib/auto/mingw/x86_64-w64-mingw32/bin/ld.exe) supports shared libraries... yes
+checking whether -lc should be explicitly linked in... yes
+checking dynamic linker characteristics... Win32 ld.exe
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... no
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... yes
+checking size of size_t... 8
+checking for C compiler vendor... gnu
+checking whether C compiler accepts -fstrict-aliasing... yes
+checking whether C compiler accepts -ffast-math... yes
+checking for gcc architecture flag... 
+checking for x86 cpuid 0 output... d:756e6547:6c65746e:49656e69
+checking for x86 cpuid 1 output... 206a7:2100800:1f9ae3bf:bfebfbff
+checking whether C compiler accepts -march=corei7-avx... yes
+checking for gcc architecture flag... -march=corei7-avx
+checking whether C compiler accepts -O3 -fomit-frame-pointer -fstrict-aliasing -ffast-math -march=corei7-avx... yes
+checking CFLAGS for maximum warnings... -Wall
+checking whether to enable maintainer-specific portions of Makefiles... no
+checking sys/mman.h usability... no
+checking sys/mman.h presence... no
+checking for sys/mman.h... no
+checking for mmap... no
+checking for sys/mman.h... (cached) no
+checking for mmap... (cached) no
+checking for ANSI C header files... (cached) yes
+checking for memcpy... yes
+checking for size_t... yes
+checking for working alloca.h... no
+checking for alloca... yes
+checking size of double... 8
+checking size of long double... 16
+checking whether byte ordering is bigendian... no
+checking assembler .cfi pseudo-op support... yes
+checking for _ prefix in compiled symbols... no
+checking whether .eh_frame section should be read-only... no
+checking for __attribute__((visibility("hidden")))... no
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating include/Makefile
+config.status: creating include/ffi.h
+config.status: creating Makefile
+config.status: creating testsuite/Makefile
+config.status: creating man/Makefile
+config.status: creating libffi.pc
+config.status: creating fficonfig.h
+config.status: linking src/x86/ffitarget.h to include/ffitarget.h
+config.status: executing buildir commands
+config.status: skipping top_srcdir/Makefile - not created
+config.status: executing depfiles commands
+config.status: executing libtool commands
+config.status: executing include commands
+config.status: executing src commands
+make 'AR_FLAGS=' 'CC_FOR_BUILD=' 'CFLAGS=-O3 -fomit-frame-pointer -fstrict-aliasing -ffast-math -march=corei7-avx  -Wall -fexceptions' 'CXXFLAGS=' 'CFLAGS_FOR_BUILD=' 'CFLAGS_FOR_TARGET=' 'INSTALL=/usr/bin/install -c' 'INSTALL_DATA=/usr/bin/install -c -m 644' 'INSTALL_PROGRAM=/usr/bin/install -c' 'INSTALL_SCRIPT=/usr/bin/install -c' 'JC1FLAGS=' 'LDFLAGS=' 'LIBCFLAGS=' 'LIBCFLAGS_FOR_TARGET=' 'MAKE=make' 'MAKEINFO=/bin/sh /c/Users/Brain/.cpanm/work/1451930511.14232/FFI-Raw-0.32/deps/libffi/missing makeinfo ' 'PICFLAG=' 'PICFLAG_FOR_TARGET=' 'RUNTESTFLAGS=' 'SHELL=/bin/sh' 'exec_prefix=/usr/local' 'infodir=/usr/local/share/info' 'libdir=/usr/local/lib' 'mandir=/usr/local/share/man' 'prefix=/usr/local' 'AR=ar' 'AS=as' 'CC=gcc' 'CXX=g++' 'LD=c:/perl64/site/lib/auto/mingw/x86_64-w64-mingw32/bin/ld.exe' 'NM=nm' 'RANLIB=:' 'DESTDIR=' all-recursive
+make[1]: Entering directory `/c/Users/Brain/.cpanm/work/1451930511.14232/FFI-Raw-0.32/deps/libffi'
+Making all in include
+make[2]: Entering directory `/c/Users/Brain/.cpanm/work/1451930511.14232/FFI-Raw-0.32/deps/libffi/include'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/c/Users/Brain/.cpanm/work/1451930511.14232/FFI-Raw-0.32/deps/libffi/include'
+Making all in testsuite
+make[2]: Entering directory `/c/Users/Brain/.cpanm/work/1451930511.14232/FFI-Raw-0.32/deps/libffi/testsuite'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/c/Users/Brain/.cpanm/work/1451930511.14232/FFI-Raw-0.32/deps/libffi/testsuite'
+Making all in man
+make[2]: Entering directory `/c/Users/Brain/.cpanm/work/1451930511.14232/FFI-Raw-0.32/deps/libffi/man'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/c/Users/Brain/.cpanm/work/1451930511.14232/FFI-Raw-0.32/deps/libffi/man'
+make[2]: Entering directory `/c/Users/Brain/.cpanm/work/1451930511.14232/FFI-Raw-0.32/deps/libffi'
+restore=: && backupdir=".am$$" && \
+	am__cwd=`pwd` && CDPATH="${ZSH_VERSION+.}:" && cd . && \
+	rm -rf $backupdir && mkdir $backupdir && \
+	if (/bin/sh /c/Users/Brain/.cpanm/work/1451930511.14232/FFI-Raw-0.32/deps/libffi/missing makeinfo   --version) >/dev/null 2>&1; then \
+	  for f in doc/libffi.info doc/libffi.info-[0-9] doc/libffi.info-[0-9][0-9] doc/libffi.i[0-9] doc/libffi.i[0-9][0-9]; do \
+	    if test -f $f; then mv $f $backupdir; restore=mv; else :; fi; \
+	  done; \
+	else :; fi && \
+	cd "$am__cwd"; \
+	if /bin/sh /c/Users/Brain/.cpanm/work/1451930511.14232/FFI-Raw-0.32/deps/libffi/missing makeinfo     -I doc -I ./doc \
+	 -o doc/libffi.info ./doc/libffi.texi; \
+	then \
+	  rc=0; \
+	  CDPATH="${ZSH_VERSION+.}:" && cd .; \
+	else \
+	  rc=$?; \
+	  CDPATH="${ZSH_VERSION+.}:" && cd . && \
+	  $restore $backupdir/* `echo "./doc/libffi.info" | sed 's|[^/]*$||'`; \
+	fi; \
+	rm -rf $backupdir; exit $rc
+depbase=`echo src/prep_cif.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
+	/bin/sh ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I. -I./include -Iinclude -I./src   -O3 -fomit-frame-pointer -fstrict-aliasing -ffast-math -march=corei7-avx  -Wall -fexceptions -MT src/prep_cif.lo -MD -MP -MF $depbase.Tpo -c -o src/prep_cif.lo src/prep_cif.c &&\
+	mv -f $depbase.Tpo $depbase.Plo
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I./include -Iinclude -I./src -O3 -fomit-frame-pointer -fstrict-aliasing -ffast-math -march=corei7-avx -Wall -fexceptions -MT src/prep_cif.lo -MD -MP -MF src/.deps/prep_cif.Tpo -c src/prep_cif.c  -DDLL_EXPORT -DPIC -o src/.libs/prep_cif.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I./include -Iinclude -I./src -O3 -fomit-frame-pointer -fstrict-aliasing -ffast-math -march=corei7-avx -Wall -fexceptions -MT src/prep_cif.lo -MD -MP -MF src/.deps/prep_cif.Tpo -c src/prep_cif.c -o src/prep_cif.o >/dev/null 2>&1
+depbase=`echo src/types.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
+	/bin/sh ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I. -I./include -Iinclude -I./src   -O3 -fomit-frame-pointer -fstrict-aliasing -ffast-math -march=corei7-avx  -Wall -fexceptions -MT src/types.lo -MD -MP -MF $depbase.Tpo -c -o src/types.lo src/types.c &&\
+	mv -f $depbase.Tpo $depbase.Plo
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I./include -Iinclude -I./src -O3 -fomit-frame-pointer -fstrict-aliasing -ffast-math -march=corei7-avx -Wall -fexceptions -MT src/types.lo -MD -MP -MF src/.deps/types.Tpo -c src/types.c  -DDLL_EXPORT -DPIC -o src/.libs/types.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I./include -Iinclude -I./src -O3 -fomit-frame-pointer -fstrict-aliasing -ffast-math -march=corei7-avx -Wall -fexceptions -MT src/types.lo -MD -MP -MF src/.deps/types.Tpo -c src/types.c -o src/types.o >/dev/null 2>&1
+depbase=`echo src/raw_api.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
+	/bin/sh ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I. -I./include -Iinclude -I./src   -O3 -fomit-frame-pointer -fstrict-aliasing -ffast-math -march=corei7-avx  -Wall -fexceptions -MT src/raw_api.lo -MD -MP -MF $depbase.Tpo -c -o src/raw_api.lo src/raw_api.c &&\
+	mv -f $depbase.Tpo $depbase.Plo
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I./include -Iinclude -I./src -O3 -fomit-frame-pointer -fstrict-aliasing -ffast-math -march=corei7-avx -Wall -fexceptions -MT src/raw_api.lo -MD -MP -MF src/.deps/raw_api.Tpo -c src/raw_api.c  -DDLL_EXPORT -DPIC -o src/.libs/raw_api.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I./include -Iinclude -I./src -O3 -fomit-frame-pointer -fstrict-aliasing -ffast-math -march=corei7-avx -Wall -fexceptions -MT src/raw_api.lo -MD -MP -MF src/.deps/raw_api.Tpo -c src/raw_api.c -o src/raw_api.o >/dev/null 2>&1
+depbase=`echo src/java_raw_api.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
+	/bin/sh ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I. -I./include -Iinclude -I./src   -O3 -fomit-frame-pointer -fstrict-aliasing -ffast-math -march=corei7-avx  -Wall -fexceptions -MT src/java_raw_api.lo -MD -MP -MF $depbase.Tpo -c -o src/java_raw_api.lo src/java_raw_api.c &&\
+	mv -f $depbase.Tpo $depbase.Plo
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I./include -Iinclude -I./src -O3 -fomit-frame-pointer -fstrict-aliasing -ffast-math -march=corei7-avx -Wall -fexceptions -MT src/java_raw_api.lo -MD -MP -MF src/.deps/java_raw_api.Tpo -c src/java_raw_api.c  -DDLL_EXPORT -DPIC -o src/.libs/java_raw_api.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I./include -Iinclude -I./src -O3 -fomit-frame-pointer -fstrict-aliasing -ffast-math -march=corei7-avx -Wall -fexceptions -MT src/java_raw_api.lo -MD -MP -MF src/.deps/java_raw_api.Tpo -c src/java_raw_api.c -o src/java_raw_api.o >/dev/null 2>&1
+depbase=`echo src/closures.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
+	/bin/sh ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I. -I./include -Iinclude -I./src   -O3 -fomit-frame-pointer -fstrict-aliasing -ffast-math -march=corei7-avx  -Wall -fexceptions -MT src/closures.lo -MD -MP -MF $depbase.Tpo -c -o src/closures.lo src/closures.c &&\
+	mv -f $depbase.Tpo $depbase.Plo
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I./include -Iinclude -I./src -O3 -fomit-frame-pointer -fstrict-aliasing -ffast-math -march=corei7-avx -Wall -fexceptions -MT src/closures.lo -MD -MP -MF src/.deps/closures.Tpo -c src/closures.c  -DDLL_EXPORT -DPIC -o src/.libs/closures.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I./include -Iinclude -I./src -O3 -fomit-frame-pointer -fstrict-aliasing -ffast-math -march=corei7-avx -Wall -fexceptions -MT src/closures.lo -MD -MP -MF src/.deps/closures.Tpo -c src/closures.c -o src/closures.o >/dev/null 2>&1
+depbase=`echo src/x86/ffi.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
+	/bin/sh ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I. -I./include -Iinclude -I./src   -O3 -fomit-frame-pointer -fstrict-aliasing -ffast-math -march=corei7-avx  -Wall -fexceptions -MT src/x86/ffi.lo -MD -MP -MF $depbase.Tpo -c -o src/x86/ffi.lo src/x86/ffi.c &&\
+	mv -f $depbase.Tpo $depbase.Plo
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I./include -Iinclude -I./src -O3 -fomit-frame-pointer -fstrict-aliasing -ffast-math -march=corei7-avx -Wall -fexceptions -MT src/x86/ffi.lo -MD -MP -MF src/x86/.deps/ffi.Tpo -c src/x86/ffi.c  -DDLL_EXPORT -DPIC -o src/x86/.libs/ffi.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I./include -Iinclude -I./src -O3 -fomit-frame-pointer -fstrict-aliasing -ffast-math -march=corei7-avx -Wall -fexceptions -MT src/x86/ffi.lo -MD -MP -MF src/x86/.deps/ffi.Tpo -c src/x86/ffi.c -o src/x86/ffi.o >/dev/null 2>&1
+depbase=`echo src/x86/win64.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
+	/bin/sh ./libtool    --mode=compile gcc -DHAVE_CONFIG_H -I.  -I. -I./include -Iinclude -I./src  -I. -I./include -Iinclude -I./src  -MT src/x86/win64.lo -MD -MP -MF $depbase.Tpo -c -o src/x86/win64.lo src/x86/win64.S &&\
+	mv -f $depbase.Tpo $depbase.Plo
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I./include -Iinclude -I./src -I. -I./include -Iinclude -I./src -MT src/x86/win64.lo -MD -MP -MF src/x86/.deps/win64.Tpo -c src/x86/win64.S  -DDLL_EXPORT -DPIC -o src/x86/.libs/win64.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I./include -Iinclude -I./src -I. -I./include -Iinclude -I./src -MT src/x86/win64.lo -MD -MP -MF src/x86/.deps/win64.Tpo -c src/x86/win64.S -o src/x86/win64.o >/dev/null 2>&1
+/bin/sh ./libtool  --tag=CC   --mode=link gcc  -O3 -fomit-frame-pointer -fstrict-aliasing -ffast-math -march=corei7-avx  -Wall -fexceptions   -o libffi_convenience.la  src/prep_cif.lo src/types.lo src/raw_api.lo src/java_raw_api.lo src/closures.lo       src/x86/ffi.lo src/x86/win64.lo                                  
+libtool: link: ar cru .libs/libffi_convenience.a src/.libs/prep_cif.o src/.libs/types.o src/.libs/raw_api.o src/.libs/java_raw_api.o src/.libs/closures.o src/x86/.libs/ffi.o src/x86/.libs/win64.o 
+libtool: link: : .libs/libffi_convenience.a
+libtool: link: ( cd ".libs" && rm -f "libffi_convenience.la" && cp -pR "../libffi_convenience.la" "libffi_convenience.la" )
+/bin/sh ./libtool  --tag=CC   --mode=link gcc  -O3 -fomit-frame-pointer -fstrict-aliasing -ffast-math -march=corei7-avx  -Wall -fexceptions -no-undefined -version-info `grep -v '^#' ./libtool-version`  -no-undefined -bindir "/usr/local/bin"  -o libffi.la -rpath /usr/local/lib/../lib src/prep_cif.lo src/types.lo src/raw_api.lo src/java_raw_api.lo src/closures.lo       src/x86/ffi.lo src/x86/win64.lo                                  
+libtool: link: gcc -shared  src/.libs/prep_cif.o src/.libs/types.o src/.libs/raw_api.o src/.libs/java_raw_api.o src/.libs/closures.o src/x86/.libs/ffi.o src/x86/.libs/win64.o    -O3 -march=corei7-avx   -o .libs/libffi-6.dll -Wl,--enable-auto-image-base -Xlinker --out-implib -Xlinker .libs/libffi.dll.a
+Creating library file: .libs/libffi.dll.a
+libtool: link: ar cru .libs/libffi.a  src/prep_cif.o src/types.o src/raw_api.o src/java_raw_api.o src/closures.o src/x86/ffi.o src/x86/win64.o
+libtool: link: : .libs/libffi.a
+libtool: link: ( cd ".libs" && rm -f "libffi.la" && cp -pR "../libffi.la" "libffi.la" )
+make[2]: Leaving directory `/c/Users/Brain/.cpanm/work/1451930511.14232/FFI-Raw-0.32/deps/libffi'
+make[1]: Leaving directory `/c/Users/Brain/.cpanm/work/1451930511.14232/FFI-Raw-0.32/deps/libffi'
+Running Mkbootstrap for FFI::Raw ()
+C:\Perl64\bin\perl.exe -MExtUtils::Command -e chmod -- 644 Raw.bs
+C:\Perl64\bin\perl.exe C:\Perl64\lib\ExtUtils\xsubpp  -typemap C:\Perl64\lib\ExtUtils\typemap -typemap typemap  Raw.xs > Raw.xsc && C:\Perl64\bin\perl.exe -MExtUtils::Command -e mv -- Raw.xsc Raw.c
+C:\Perl64\site\bin\gcc.exe -c  -I. -Ixs -Ideps -Ideps/libffi/include 	-s -O2 -DWIN32 -DWIN64 -DCONSERVATIVE -DPERL_TEXTMODE_SCRIPTS -DUSE_SITECUSTOMIZE -DPERL_IMPLICIT_CONTEXT -DPERL_IMPLICIT_SYS -DUSE_PERLIO -fwrapv -fno-strict-aliasing -mms-bitfields -s -O2 	  -DVERSION=\"0.32\" 	-DXS_VERSION=\"0.32\"  "-IC:\Perl64\lib\CORE"   Raw.c
+C:\Perl64\bin\perl.exe -MExtUtils::Mksymlists \
+     -e "Mksymlists('NAME'=>\"FFI::Raw\", 'DLBASE' => 'Raw', 'DL_FUNCS' => {  }, 'FUNCLIST' => [], 'IMPORTS' => {  }, 'DL_VARS' => []);"
+C:\Perl64\site\bin\dlltool.exe --def Raw.def --output-exp dll.exp
+C:\Perl64\site\bin\g++.exe -o blib\arch\auto\FFI\Raw\Raw.dll -Wl,--base-file -Wl,dll.base -mdll -s -static-libgcc -static-libstdc++ -L"C:\Perl64\lib\CORE" -L"C:\MinGW\x86_64-w64-mingw32\lib" Raw.o deps/libffi/.libs/libffi.a  deps/libffi/.libs/libffi.a C:\Perl64\lib\CORE\libperl520.a -lmoldname -lkernel32 -luser32 -lgdi32 -lwinspool -lcomdlg32 -ladvapi32 -lshell32 -lole32 -loleaut32 -lnetapi32 -luuid -lws2_32 -lmpr -lwinmm -lversion -lodbc32 -lodbccp32 -lcomctl32 dll.exp
+Raw.o:Raw.c:(.text+0x35b9): undefined reference to `EnumProcessModules'
+Raw.o:Raw.c:(.text+0x3624): undefined reference to `GetModuleFileNameExA'
+c:/perl64/site/lib/auto/mingw/bin/../lib/gcc/x86_64-w64-mingw32/4.6.3/../../../../x86_64-w64-mingw32/bin/ld.exe: Raw.o: bad reloc address 0x108 in section `.rdata'
+c:/perl64/site/lib/auto/mingw/bin/../lib/gcc/x86_64-w64-mingw32/4.6.3/../../../../x86_64-w64-mingw32/bin/ld.exe: final link failed: Invalid operation
+collect2: ld returned 1 exit status
+dmake.exe:  Error code 129, while making 'blib\arch\auto\FFI\Raw\Raw.dll'
+-> FAIL Installing FFI::Raw failed. See C:\Users\Brain\.cpanm\work\1451930511.14232\build.log for details. Retry with --force to force install it.
