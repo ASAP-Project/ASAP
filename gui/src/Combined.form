@@ -84,7 +84,7 @@
                           <Component id="openSpreadsheet" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="testTypePanel" min="-2" max="-2" attributes="0"/>
+                  <Component id="testTypePanel" min="-2" pref="306" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="trainingWarningLabel" min="-2" max="-2" attributes="0"/>
@@ -117,7 +117,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="testTypeTipLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="queryExperimentTabbedPane" max="32767" attributes="0"/>
+                  <Component id="queryExperimentTabbedPane" pref="0" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>

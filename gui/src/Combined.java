@@ -2,8 +2,10 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Combined extends javax.swing.JFrame {
     
@@ -1066,32 +1068,47 @@ public class Combined extends javax.swing.JFrame {
         try {
             // fill a string array with the command line arguments
             String installDir = System.getenv("ASAPLIB");
-            String [] args = new String [list.size() + 3];
-            list.add(0, "perl");
-            list.add(1,installDir + "\\Asap.pl");
+            String [] args = new String [list.size() + 4];
+            list.add(1, "perl");
+            list.add(2,installDir + "\\Asap.pl");
             list.add("-verbose");
+            list.add(0, "cmd ");
             list.toArray(args);
             
-            for(int i = 0; i < args.length; i++)
-                resultsTextArea.append(args[i]+" ");
+            //for(int i = 0; i < args.length; i++)
+                //resultsTextArea.append(args[i]+" ");
             resultsTextArea.append("\n");
             
             // run the process and intercept its output
-            //ProcessBuilder builder = new ProcessBuilder(args);
-            //final Process process = builder.start();
+            ProcessBuilder builder = new ProcessBuilder(args);
+            final Process process = builder.start();
             
-            Process process = Runtime.getRuntime().exec(args);
-            
+            //Process process = Runtime.getRuntime().exec(args);
+ 
             StreamGobbler errorGobbler = new StreamGobbler(process.getErrorStream(),resultsTextArea,"ERROR: ");
             StreamGobbler inputGobbler = new StreamGobbler(process.getInputStream(),resultsTextArea,"");
             
             inputGobbler.start();
             errorGobbler.start();
             
+            File file = createResultDirectory(trainingOutputTextField.getText());
+            PrintWriter writer = new PrintWriter(file);
+            
             int exitVal = process.waitFor();
             resultsTextArea.append("Exit Value: " + exitVal + "\n");
+            
+            String resultText = resultsTextArea.getText();
+
+            writer.println(resultText);            
+            writer.close();
+
         } catch (Throwable t) {
         }
+    }
+    
+    public File createResultDirectory(String path)
+    {
+        return new File(path, "TestingResults");
     }
     
     public String openDirectory() {
