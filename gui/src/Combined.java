@@ -1068,17 +1068,16 @@ public class Combined extends javax.swing.JFrame {
         try {
             // fill a string array with the command line arguments
             String installDir = System.getenv("ASAPLIB");
-            String [] args = new String [list.size() + 4];
-            list.add(1, "perl");
-            list.add(2,installDir + "\\Asap.pl");
+            String [] args = new String [list.size() + 3];
+            list.add(0, "perl");
+            list.add(1,installDir + "\\Asap.pl");
             list.add("-verbose");
-            list.add(0, "cmd ");
+            //list.add(0, "cmd ");
             list.toArray(args);
             
             //for(int i = 0; i < args.length; i++)
                 //resultsTextArea.append(args[i]+" ");
             resultsTextArea.append("\n");
-            
             // run the process and intercept its output
             ProcessBuilder builder = new ProcessBuilder(args);
             final Process process = builder.start();
@@ -1093,6 +1092,7 @@ public class Combined extends javax.swing.JFrame {
             
             File file = createResultDirectory(trainingOutputTextField.getText());
             PrintWriter writer = new PrintWriter(file);
+
             
             int exitVal = process.waitFor();
             resultsTextArea.append("Exit Value: " + exitVal + "\n");
