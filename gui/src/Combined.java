@@ -1075,9 +1075,15 @@ public class Combined extends javax.swing.JFrame {
             //list.add(0, "cmd ");
             list.toArray(args);
             
+            String outPut = "";
+            for(int i = 0; i< args.length; i++)
+                outPut += args[i] +" ";
+            
             //for(int i = 0; i < args.length; i++)
                 //resultsTextArea.append(args[i]+" ");
             resultsTextArea.append("\n");
+            System.out.println(outPut);
+            
             // run the process and intercept its output
             ProcessBuilder builder = new ProcessBuilder(args);
             final Process process = builder.start();
@@ -1090,17 +1096,8 @@ public class Combined extends javax.swing.JFrame {
             inputGobbler.start();
             errorGobbler.start();
             
-            File file = createResultDirectory(trainingOutputTextField.getText());
-            PrintWriter writer = new PrintWriter(file);
-
-            
             int exitVal = process.waitFor();
             resultsTextArea.append("Exit Value: " + exitVal + "\n");
-            
-            String resultText = resultsTextArea.getText();
-
-            writer.println(resultText);            
-            writer.close();
 
         } catch (Throwable t) {
         }
