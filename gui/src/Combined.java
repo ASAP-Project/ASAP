@@ -115,6 +115,7 @@ public class Combined extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         resultsTextArea = new javax.swing.JTextArea();
         openSpreadsheet = new javax.swing.JButton();
+        clearBtn = new javax.swing.JButton();
 
         progressBar.setValue(65);
 
@@ -254,7 +255,7 @@ public class Combined extends javax.swing.JFrame {
                         .addComponent(trainingOutputButton)
                         .addComponent(trainingOutputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(trainingOutputCheckmark, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
 
         queryExperimentTabbedPane.addTab("Query", directoryPanel);
@@ -696,6 +697,7 @@ public class Combined extends javax.swing.JFrame {
         resultsTextArea.setEditable(false);
         resultsTextArea.setColumns(20);
         resultsTextArea.setRows(5);
+        resultsTextArea.setMinimumSize(new java.awt.Dimension(100, 100));
         jScrollPane1.setViewportView(resultsTextArea);
 
         openSpreadsheet.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -712,6 +714,16 @@ public class Combined extends javax.swing.JFrame {
             }
         });
 
+        clearBtn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        clearBtn.setText("Clear Output");
+        clearBtn.setMaximumSize(new java.awt.Dimension(95, 31));
+        clearBtn.setMinimumSize(new java.awt.Dimension(95, 31));
+        clearBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clearBtnMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -721,16 +733,18 @@ public class Combined extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(testTypePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addComponent(attMethodPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(attMethodPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 11, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(83, 83, 83)
                                 .addComponent(runProgramButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(openSpreadsheet)))
-                        .addGap(0, 24, Short.MAX_VALUE))
+                                .addComponent(openSpreadsheet)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(clearBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1)
                         .addContainerGap())))
@@ -743,19 +757,21 @@ public class Combined extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(attMethodPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(runProgramButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(openSpreadsheet, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(testTypePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(runProgramButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(openSpreadsheet, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(clearBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(testTypePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(trainingWarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -1026,6 +1042,10 @@ public class Combined extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_openSpreadsheetStateChanged
 
+    private void clearBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearBtnMouseClicked
+        resultsTextArea.setText("");
+    }//GEN-LAST:event_clearBtnMouseClicked
+
     
     
     /**
@@ -1072,12 +1092,11 @@ public class Combined extends javax.swing.JFrame {
             list.add(0, "perl");
             list.add(1,installDir + "\\Asap.pl");
             list.add("-verbose");
-            //list.add(0, "cmd ");
             list.toArray(args);
             
             String outPut = "";
             for(int i = 0; i< args.length; i++)
-                outPut += args[i] +" ";
+                    outPut += args[i] +" ";
             
             //for(int i = 0; i < args.length; i++)
                 //resultsTextArea.append(args[i]+" ");
@@ -1085,10 +1104,10 @@ public class Combined extends javax.swing.JFrame {
             System.out.println(outPut);
             
             // run the process and intercept its output
-            ProcessBuilder builder = new ProcessBuilder(args);
-            final Process process = builder.start();
+            //ProcessBuilder builder = new ProcessBuilder(args);
+            //final Process process = builder.start();
             
-            //Process process = Runtime.getRuntime().exec(args);
+            Process process = Runtime.getRuntime().exec(args);
  
             StreamGobbler errorGobbler = new StreamGobbler(process.getErrorStream(),resultsTextArea,"ERROR: ");
             StreamGobbler inputGobbler = new StreamGobbler(process.getInputStream(),resultsTextArea,"");
@@ -1101,11 +1120,6 @@ public class Combined extends javax.swing.JFrame {
 
         } catch (Throwable t) {
         }
-    }
-    
-    public File createResultDirectory(String path)
-    {
-        return new File(path, "TestingResults");
     }
     
     public String openDirectory() {
@@ -1139,6 +1153,7 @@ public class Combined extends javax.swing.JFrame {
     private javax.swing.JTextField burrowsNTextField;
     private javax.swing.JPanel burrowsPanel;
     private javax.swing.JLabel burrowsTipLabel;
+    private javax.swing.JButton clearBtn;
     private javax.swing.JLabel defaultSplitLabel;
     private javax.swing.JPanel defaultSplitPanel;
     private javax.swing.JButton defaultSplitTestDirButton;

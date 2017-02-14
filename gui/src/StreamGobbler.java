@@ -24,7 +24,11 @@ class StreamGobbler extends Thread
             BufferedReader br = new BufferedReader(isr);
             String line=null;
             while ( (line = br.readLine()) != null)
-                textArea.append(type+line+"\n"); 
+            {
+                if(line.contains("/index/index"))
+                    line.replace("/index/index", "\\index");
+                textArea.append(type+line+"\n");   
+            }
             } catch (IOException ioe)
             {
               ioe.printStackTrace();  
