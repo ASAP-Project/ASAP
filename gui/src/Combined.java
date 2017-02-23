@@ -2,20 +2,20 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Combined extends javax.swing.JFrame {
     
     private boolean trainAgain;
     private ArrayList<String> lastCommand;
-    
+    private File currentWorkingDirectory; 
     public Combined() {
         initComponents();
         setTrainAgain(false);
         lastCommand = new ArrayList();
+        currentWorkingDirectory = new File("../../src").getAbsoluteFile();
+        System.setProperty("user.dir", currentWorkingDirectory.getAbsolutePath());
+        System.out.println(System.getProperty("user.dir"));
         /*
         Runnable runnable = new Runnable() {
             public void run () {
@@ -1087,10 +1087,10 @@ public class Combined extends javax.swing.JFrame {
     public void executeCommand(ArrayList<String> list) {
         try {
             // fill a string array with the command line arguments
-            String installDir = System.getenv("ASAPLIB");
+            //String installDir = System.getenv("ASAPLIB");
             String [] args = new String [list.size() + 3];
             list.add(0, "perl");
-            list.add(1,installDir + "\\Asap.pl");
+            list.add(1,System.getProperty("user.dir") + "/Asap.pl");
             list.add("-verbose");
             list.toArray(args);
             
