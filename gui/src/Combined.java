@@ -905,6 +905,7 @@ public class Combined extends javax.swing.JFrame {
     }
     
     private void runProgramButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runProgramButtonActionPerformed
+        runProgramButton.setEnabled(false);
         Runnable runnable = new Runnable() {
             public void run () {
                 int currentMethod = methodTabbedPane.getSelectedIndex();
@@ -1185,6 +1186,7 @@ public class Combined extends javax.swing.JFrame {
             
             int exitVal = process.waitFor();
             resultsTextArea.append("Exit Value: " + exitVal + "\n");
+            runProgramButton.setEnabled(true);
 
         } catch (Throwable t) {
         }
