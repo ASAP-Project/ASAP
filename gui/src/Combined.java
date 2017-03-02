@@ -13,9 +13,6 @@ public class Combined extends javax.swing.JFrame {
         initComponents();
         setTrainAgain(false);
         lastCommand = new ArrayList();
-        currentWorkingDirectory = new File("../../src").getAbsoluteFile();
-        System.setProperty("user.dir", currentWorkingDirectory.getAbsolutePath());
-        System.out.println(System.getProperty("user.dir"));
         /*
         Runnable runnable = new Runnable() {
             public void run () {
@@ -111,11 +108,11 @@ public class Combined extends javax.swing.JFrame {
         burrowsNTextField = new javax.swing.JTextField();
         attMethodTipLabel = new javax.swing.JLabel();
         runProgramButton = new javax.swing.JButton();
+        openSpreadsheet = new javax.swing.JButton();
+        clearBtn = new javax.swing.JButton();
         trainingWarningLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         resultsTextArea = new javax.swing.JTextArea();
-        openSpreadsheet = new javax.swing.JButton();
-        clearBtn = new javax.swing.JButton();
 
         progressBar.setValue(65);
 
@@ -144,6 +141,7 @@ public class Combined extends javax.swing.JFrame {
 
         trainingInputTextField.setText("Training input directory... ");
         trainingInputTextField.setEnabled(false);
+        trainingInputTextField.setPreferredSize(new java.awt.Dimension(292, 22));
         trainingInputTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 trainingInputTextFieldActionPerformed(evt);
@@ -159,6 +157,7 @@ public class Combined extends javax.swing.JFrame {
 
         trainingOutputTextField.setText("Training output directory...");
         trainingOutputTextField.setEnabled(false);
+        trainingOutputTextField.setMinimumSize(new java.awt.Dimension(292, 22));
         trainingOutputTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 trainingOutputTextFieldActionPerformed(evt);
@@ -210,7 +209,6 @@ public class Combined extends javax.swing.JFrame {
             .addGroup(directoryPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(directoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(queryTipLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(directoryPanelLayout.createSequentialGroup()
                         .addGroup(directoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(testFileCheckmark)
@@ -219,17 +217,18 @@ public class Combined extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(directoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(directoryPanelLayout.createSequentialGroup()
-                                .addComponent(testFileTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(testFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(directoryPanelLayout.createSequentialGroup()
-                                .addGroup(directoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(trainingInputTextField)
-                                    .addComponent(trainingOutputTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(directoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(trainingOutputButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(trainingInputButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(trainingInputTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(trainingOutputTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(directoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(trainingInputButton, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(trainingOutputButton, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(directoryPanelLayout.createSequentialGroup()
+                                .addComponent(testFileTextField)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(testFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(queryTipLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         directoryPanelLayout.setVerticalGroup(
@@ -249,16 +248,25 @@ public class Combined extends javax.swing.JFrame {
                     .addGroup(directoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(trainingInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(trainingInputButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(directoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(directoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(trainingOutputButton)
-                        .addComponent(trainingOutputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(trainingOutputCheckmark, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addGroup(directoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(directoryPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(trainingOutputCheckmark, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, directoryPanelLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addGroup(directoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(trainingOutputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(trainingOutputButton))))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         queryExperimentTabbedPane.addTab("Query", directoryPanel);
+
+        testMethodTabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                testMethodTabbedPaneStateChanged(evt);
+            }
+        });
 
         defaultSplitTestDirTextField.setText("Test directory...");
         defaultSplitTestDirTextField.setEnabled(false);
@@ -301,7 +309,7 @@ public class Combined extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(defaultSplitPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(defaultSplitTestDirTextField)
-                            .addComponent(defaultSplitTrainingDirTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE))
+                            .addComponent(defaultSplitTrainingDirTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(defaultSplitPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(defaultSplitTestDirButton, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -344,6 +352,7 @@ public class Combined extends javax.swing.JFrame {
 
         kFoldTestDirTextField.setText("Test directory...");
         kFoldTestDirTextField.setEnabled(false);
+        kFoldTestDirTextField.setPreferredSize(new java.awt.Dimension(283, 22));
 
         kFoldTestDirButton.setText("Browse\n");
         kFoldTestDirButton.addActionListener(new java.awt.event.ActionListener() {
@@ -361,19 +370,17 @@ public class Combined extends javax.swing.JFrame {
             .addGroup(kFoldPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(kFoldPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(kFoldTipLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(kFoldPanelLayout.createSequentialGroup()
-                        .addComponent(kFoldTipLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kFoldPanelLayout.createSequentialGroup()
                         .addGroup(kFoldPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(kFoldPanelLayout.createSequentialGroup()
                                 .addComponent(kFoldKValueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(kFoldKValueSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(kFoldKValueSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(kFoldPanelLayout.createSequentialGroup()
                                 .addComponent(kFoldTestDirCheckmark)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(kFoldTestDirTextField)))
+                                .addComponent(kFoldTestDirTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(kFoldPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(kFoldTestDirButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -424,15 +431,14 @@ public class Combined extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(leaveOneOutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(leaveOneOutPanelLayout.createSequentialGroup()
-                        .addGap(0, 1, Short.MAX_VALUE)
                         .addComponent(leaveOneOutTestDirCheckmark)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(leaveOneOutTestDirTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(leaveOneOutTestDirTextField)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(leaveOneOutTestDirButton))
                     .addGroup(leaveOneOutPanelLayout.createSequentialGroup()
-                        .addComponent(leaveOneOutTipLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(leaveOneOutTipLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
+                        .addGap(0, 65, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         leaveOneOutPanelLayout.setVerticalGroup(
@@ -460,10 +466,8 @@ public class Combined extends javax.swing.JFrame {
             .addGroup(testMethodPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(testMethodPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(testMethodTabbedPane)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, testMethodPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(experimentTipLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(experimentTipLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(testMethodTabbedPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         testMethodPanelLayout.setVerticalGroup(
@@ -471,9 +475,9 @@ public class Combined extends javax.swing.JFrame {
             .addGroup(testMethodPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(experimentTipLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(testMethodTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 183, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(testMethodTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         queryExperimentTabbedPane.addTab("Experiment", testMethodPanel);
@@ -487,9 +491,10 @@ public class Combined extends javax.swing.JFrame {
             .addGroup(testTypePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(testTypePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(testTypeTipLabel)
-                    .addComponent(queryExperimentTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(queryExperimentTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
+                    .addGroup(testTypePanelLayout.createSequentialGroup()
+                        .addComponent(testTypeTipLabel)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         testTypePanelLayout.setVerticalGroup(
             testTypePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -497,9 +502,17 @@ public class Combined extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(testTypeTipLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(queryExperimentTabbedPane)
-                .addContainerGap())
+                .addComponent(queryExperimentTabbedPane))
         );
+
+        methodTabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                methodTabbedPaneStateChanged(evt);
+            }
+        });
+
+        scapPanel.setMaximumSize(new java.awt.Dimension(459, 138));
+        scapPanel.setMinimumSize(new java.awt.Dimension(459, 138));
 
         scapNSlider.setMajorTickSpacing(5);
         scapNSlider.setMaximum(25);
@@ -523,12 +536,17 @@ public class Combined extends javax.swing.JFrame {
 
         scapTipLabel.setText("<html>\nSCAP is a language-agnostic method that only compares groups of tokens in the file(s). <b>N</b> is the token length, <b>L</b> is the maxium number of tokens to store.\n</html>");
 
+        scapNTextField.setMaximumSize(new java.awt.Dimension(96, 20));
+        scapNTextField.setMinimumSize(new java.awt.Dimension(96, 20));
+        scapNTextField.setPreferredSize(new java.awt.Dimension(96, 20));
         scapNTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 scapNTextFieldActionPerformed(evt);
             }
         });
 
+        scapLTextField.setMaximumSize(new java.awt.Dimension(96, 20));
+        scapLTextField.setMinimumSize(new java.awt.Dimension(96, 20));
         scapLTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 scapLTextFieldActionPerformed(evt);
@@ -541,20 +559,21 @@ public class Combined extends javax.swing.JFrame {
             scapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(scapPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(scapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(scapTipLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(scapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(scapPanelLayout.createSequentialGroup()
-                        .addGroup(scapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(scapNLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(scapLLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(scapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(scapLLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+                            .addComponent(scapNLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(scapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(scapNSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
-                            .addComponent(scapLValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(scapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(scapLValue, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
+                            .addComponent(scapNSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(2, 2, 2))
+                    .addComponent(scapTipLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(scapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scapLTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
-                    .addComponent(scapNTextField))
+                    .addComponent(scapLTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(scapNTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         scapPanelLayout.setVerticalGroup(
@@ -570,9 +589,8 @@ public class Combined extends javax.swing.JFrame {
                     .addComponent(scapNTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(scapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(scapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(scapLValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(scapLLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(scapLValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(scapLLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(scapLTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -613,6 +631,8 @@ public class Combined extends javax.swing.JFrame {
 
         tokenFileCheckmark.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guisample/close.png"))); // NOI18N
 
+        burrowsNTextField.setPreferredSize(new java.awt.Dimension(96, 20));
+
         javax.swing.GroupLayout burrowsPanelLayout = new javax.swing.GroupLayout(burrowsPanel);
         burrowsPanel.setLayout(burrowsPanelLayout);
         burrowsPanelLayout.setHorizontalGroup(
@@ -626,7 +646,7 @@ public class Combined extends javax.swing.JFrame {
                             .addGroup(burrowsPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(burrowsNSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(burrowsNSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE))
                             .addGroup(burrowsPanelLayout.createSequentialGroup()
                                 .addComponent(tokenFileCheckmark)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -661,44 +681,14 @@ public class Combined extends javax.swing.JFrame {
 
         attMethodTipLabel.setText("Select the attribution search method you would like to use.");
 
-        javax.swing.GroupLayout attMethodPanelLayout = new javax.swing.GroupLayout(attMethodPanel);
-        attMethodPanel.setLayout(attMethodPanelLayout);
-        attMethodPanelLayout.setHorizontalGroup(
-            attMethodPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(attMethodPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(attMethodPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(methodTabbedPane)
-                    .addGroup(attMethodPanelLayout.createSequentialGroup()
-                        .addComponent(attMethodTipLabel)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-        );
-        attMethodPanelLayout.setVerticalGroup(
-            attMethodPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(attMethodPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(attMethodTipLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(methodTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         runProgramButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         runProgramButton.setText("Query");
+        runProgramButton.setEnabled(false);
         runProgramButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 runProgramButtonActionPerformed(evt);
             }
         });
-
-        trainingWarningLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guisample/warning.png"))); // NOI18N
-        trainingWarningLabel.setText("<html> Warning: Training has to be completed before the test can begin. The test will take some extra time to complete. </html>");
-
-        resultsTextArea.setEditable(false);
-        resultsTextArea.setColumns(20);
-        resultsTextArea.setRows(5);
-        resultsTextArea.setMinimumSize(new java.awt.Dimension(100, 100));
-        jScrollPane1.setViewportView(resultsTextArea);
 
         openSpreadsheet.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         openSpreadsheet.setText("Open Spreadsheet");
@@ -718,11 +708,57 @@ public class Combined extends javax.swing.JFrame {
         clearBtn.setText("Clear Output");
         clearBtn.setMaximumSize(new java.awt.Dimension(95, 31));
         clearBtn.setMinimumSize(new java.awt.Dimension(95, 31));
+        clearBtn.setPreferredSize(new java.awt.Dimension(135, 34));
         clearBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 clearBtnMouseClicked(evt);
             }
         });
+
+        javax.swing.GroupLayout attMethodPanelLayout = new javax.swing.GroupLayout(attMethodPanel);
+        attMethodPanel.setLayout(attMethodPanelLayout);
+        attMethodPanelLayout.setHorizontalGroup(
+            attMethodPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(attMethodPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(attMethodTipLabel)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(attMethodPanelLayout.createSequentialGroup()
+                .addGroup(attMethodPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(attMethodPanelLayout.createSequentialGroup()
+                        .addComponent(runProgramButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(openSpreadsheet, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(clearBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(attMethodPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(methodTabbedPane)))
+                .addContainerGap())
+        );
+        attMethodPanelLayout.setVerticalGroup(
+            attMethodPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(attMethodPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(attMethodTipLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(methodTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(attMethodPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(runProgramButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(openSpreadsheet, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clearBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        trainingWarningLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guisample/warning.png"))); // NOI18N
+        trainingWarningLabel.setText("<html> Warning: Training has to be completed before the test can begin. The test will take some extra time to complete. </html>");
+
+        resultsTextArea.setEditable(false);
+        resultsTextArea.setColumns(20);
+        resultsTextArea.setRows(5);
+        resultsTextArea.setMinimumSize(new java.awt.Dimension(100, 100));
+        jScrollPane1.setViewportView(resultsTextArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -730,47 +766,29 @@ public class Combined extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(testTypePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(attMethodPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 11, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(runProgramButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(openSpreadsheet)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(clearBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addContainerGap())))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(159, 159, 159)
+                        .addComponent(testTypePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(attMethodPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(trainingWarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 593, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(249, 249, 249))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(attMethodPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(runProgramButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(openSpreadsheet, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(clearBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(testTypePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(trainingWarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(testTypePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(attMethodPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(trainingWarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -788,6 +806,7 @@ public class Combined extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(null,"Please specify the Path");
         }
+        queryExperimentButtonUnlock();
     }//GEN-LAST:event_defaultSplitTestDirButtonActionPerformed
 
     private void defaultSplitTrainingDirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_defaultSplitTrainingDirButtonActionPerformed
@@ -801,6 +820,7 @@ public class Combined extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(null,"Please specify the Path");
         }
+        queryExperimentButtonUnlock();
     }//GEN-LAST:event_defaultSplitTrainingDirButtonActionPerformed
 
     private void kFoldTestDirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kFoldTestDirButtonActionPerformed
@@ -814,6 +834,7 @@ public class Combined extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(null,"Please specify the Path");
         }
+        queryExperimentButtonUnlock();
     }//GEN-LAST:event_kFoldTestDirButtonActionPerformed
 
     private void leaveOneOutTestDirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leaveOneOutTestDirButtonActionPerformed
@@ -828,6 +849,7 @@ public class Combined extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(null,"Please specify the Path");
         }
+        queryExperimentButtonUnlock();
     }//GEN-LAST:event_leaveOneOutTestDirButtonActionPerformed
 
     private ArrayList<String> getTrainingCommandLineStr() {
@@ -852,6 +874,34 @@ public class Combined extends javax.swing.JFrame {
         //list.add("-verbose");
         
         return list;
+    }
+    
+    private boolean checkFileTextInput() //TODO scap and burrows pane need to be seperate in check
+    { 
+        if(methodTabbedPane.getSelectedIndex() == 0 && scapNSlider.getValue() != 0 && queryExperimentPaneFileCheck())
+            return true;
+        if(methodTabbedPane.getSelectedIndex() == 1 && burrowsNSlider.getValue() != 0 && !tokenFileTextField.getText().isEmpty() && !tokenFileTextField.getText().equals("Token File... ") && queryExperimentPaneFileCheck())
+            return true;
+        return false;     
+    }
+    
+    private boolean queryExperimentPaneFileCheck()
+    {
+        if(queryExperimentTabbedPane.getSelectedIndex() == 0 && !testFileTextField.getText().isEmpty() && !testFileTextField.getText().equals("Test File...") && 
+                    !trainingInputTextField.getText().isEmpty() && !trainingInputTextField.getText().equals("Training input directory...") && 
+                    !trainingOutputTextField.getText().isEmpty() && !trainingOutputTextField.getText().equals("Training output directory..."))
+            return true;
+        else if(queryExperimentTabbedPane.getSelectedIndex() == 1)
+        {
+            if(testMethodTabbedPane.getSelectedIndex() == 0 && !defaultSplitTestDirTextField.getText().isEmpty() && !defaultSplitTestDirTextField.getText().equals("Test directory...") &&
+                    !defaultSplitTrainingDirTextField.getText().isEmpty() && !defaultSplitTrainingDirTextField.getText().equals("Training directory..."))
+                return true;
+            else if(testMethodTabbedPane.getSelectedIndex() == 1 && !kFoldTestDirTextField.getText().isEmpty() && !kFoldTestDirTextField.getText().equals("Test directory..."))
+                return true;
+            else if(testMethodTabbedPane.getSelectedIndex() == 2 && !leaveOneOutTestDirTextField.getText().isEmpty() && !leaveOneOutTestDirTextField.getText().equals("Test directory..."))
+                return true;
+        }
+        return false;
     }
     
     private void runProgramButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runProgramButtonActionPerformed
@@ -933,6 +983,7 @@ public class Combined extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(null,"Please specify the Path");
         } 
+        queryExperimentButtonUnlock();
     }//GEN-LAST:event_tokenFileButtonActionPerformed
 
     private void testFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testFileButtonActionPerformed
@@ -947,6 +998,7 @@ public class Combined extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(null,"Please specify the Path");
         }
+        queryExperimentButtonUnlock();
     }//GEN-LAST:event_testFileButtonActionPerformed
 
     private void testFileTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testFileTextFieldActionPerformed
@@ -964,6 +1016,7 @@ public class Combined extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(null,"Please specify the Path");
         }
+        queryExperimentButtonUnlock();
     }//GEN-LAST:event_trainingInputButtonActionPerformed
 
     private void trainingOutputTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trainingOutputTextFieldActionPerformed
@@ -985,13 +1038,14 @@ public class Combined extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(null,"Please specify the Path");
         }
+        queryExperimentButtonUnlock();
     }//GEN-LAST:event_trainingOutputButtonActionPerformed
 
     private void openSpreadsheetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openSpreadsheetActionPerformed
 
         try
         {
-            java.awt.Desktop.getDesktop().open(new File("results.xls"));
+            java.awt.Desktop.getDesktop().open(new File("results.xls"));           
         }
         catch(IOException e)
         {
@@ -999,11 +1053,17 @@ public class Combined extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_openSpreadsheetActionPerformed
 
+    private void queryExperimentButtonUnlock()
+    {
+        runProgramButton.setEnabled(checkFileTextInput());
+    }
+    
     private void queryExperimentTabbedPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_queryExperimentTabbedPaneStateChanged
         if (queryExperimentTabbedPane.getSelectedIndex() == 0)
             runProgramButton.setText("Query");
         else
             runProgramButton.setText("Experiment");
+         queryExperimentButtonUnlock();
     }//GEN-LAST:event_queryExperimentTabbedPaneStateChanged
 
     private void tokenFileTextFieldPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tokenFileTextFieldPropertyChange
@@ -1031,20 +1091,28 @@ public class Combined extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowStateChanged
 
     private void scapLTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scapLTextFieldActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_scapLTextFieldActionPerformed
 
     private void scapNTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scapNTextFieldActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_scapNTextFieldActionPerformed
 
     private void openSpreadsheetStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_openSpreadsheetStateChanged
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_openSpreadsheetStateChanged
 
     private void clearBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearBtnMouseClicked
         resultsTextArea.setText("");
     }//GEN-LAST:event_clearBtnMouseClicked
+
+    private void methodTabbedPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_methodTabbedPaneStateChanged
+        queryExperimentButtonUnlock();
+    }//GEN-LAST:event_methodTabbedPaneStateChanged
+
+    private void testMethodTabbedPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_testMethodTabbedPaneStateChanged
+        queryExperimentButtonUnlock();
+    }//GEN-LAST:event_testMethodTabbedPaneStateChanged
 
     
     
@@ -1101,7 +1169,7 @@ public class Combined extends javax.swing.JFrame {
             //for(int i = 0; i < args.length; i++)
                 //resultsTextArea.append(args[i]+" ");
             resultsTextArea.append("\n");
-            System.out.println(outPut);
+            resultsTextArea.append("Executing: " + outPut + "\n");
             
             // run the process and intercept its output
             //ProcessBuilder builder = new ProcessBuilder(args);
