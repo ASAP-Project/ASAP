@@ -966,7 +966,7 @@ public class Combined extends javax.swing.JFrame {
                     resultsTextArea.append("Experiment..."+"\n");
                     executeCommand(list);
                 }
-                
+                runProgramButton.setEnabled(true);
                 openSpreadsheet.setEnabled(true);
             }
         };
@@ -1183,10 +1183,6 @@ public class Combined extends javax.swing.JFrame {
             
             inputGobbler.start();
             errorGobbler.start();
-            
-            int exitVal = process.waitFor();
-            resultsTextArea.append("Exit Value: " + exitVal + "\n");
-            runProgramButton.setEnabled(true);
 
         } catch (Throwable t) {
         }
