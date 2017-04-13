@@ -786,7 +786,7 @@ public class Combined extends javax.swing.JFrame {
         {
             String filename = openDirectory();
             defaultSplitTestDirTextField.setText(filename);
-            defaultSplitTestDirCheckmark.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guisample/checkmark.png")));
+            defaultSplitTestDirCheckmark.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/checkmark.png")));
         }
         catch(Exception e)
         {
@@ -800,7 +800,7 @@ public class Combined extends javax.swing.JFrame {
         {
             String filename = openDirectory();
             defaultSplitTrainingDirTextField.setText(filename);
-            defaultSplitTrainingDirCheckmark.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guisample/checkmark.png")));
+            defaultSplitTrainingDirCheckmark.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/checkmark.png")));
         }
         catch(Exception e)
         {
@@ -814,7 +814,7 @@ public class Combined extends javax.swing.JFrame {
         {
             String filename = openDirectory();
             kFoldTestDirTextField.setText(filename);
-            kFoldTestDirCheckmark.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guisample/checkmark.png")));
+            kFoldTestDirCheckmark.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/checkmark.png")));
         }
         catch(Exception e)
         {
@@ -828,7 +828,7 @@ public class Combined extends javax.swing.JFrame {
         {
             String filename = openDirectory();
             leaveOneOutTestDirTextField.setText(filename);
-            leaveOneOutTestDirCheckmark.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guisample/checkmark.png")));
+            leaveOneOutTestDirCheckmark.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/checkmark.png")));
         }
 
         catch(Exception e)
@@ -916,7 +916,8 @@ public class Combined extends javax.swing.JFrame {
                     
                     if (currentMethod == 0) { //scap
                         list.add("-n="+scapNSlider.getValue());
-                        list.add("-L="+scapLValue.getValue());
+			if(!scapLValue.isEnabled())
+                            list.add("-L="+scapLValue.getValue());
                     }
                     
                     if (generateSpreadsheet)
@@ -940,10 +941,8 @@ public class Combined extends javax.swing.JFrame {
                     
                     if (currentMethod == 0) { //scap
                         list.add("-n="+scapNSlider.getValue());
-                        if(!scapLTextField.getText().equals(""))
+                        if(!scapLValue.isEnabled())
                             list.add("-L="+scapLValue.getValue());
-                        else
-                            list.add("-L=" + 0);
                     } else { //burrows
                         list.add("-n="+burrowsNSlider.getValue());
                         list.add("-tokenfile="+tokenFileTextField.getText());
@@ -967,7 +966,7 @@ public class Combined extends javax.swing.JFrame {
         {
             String filename=openFile();
             tokenFileTextField.setText(filename);
-            tokenFileCheckmark.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guisample/checkmark.png")));
+            tokenFileCheckmark.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/checkmark.png")));
         }
         catch(Exception e)
         {
@@ -982,7 +981,7 @@ public class Combined extends javax.swing.JFrame {
         {
             String filename = openFile();
             testFileTextField.setText(filename);
-            testFileCheckmark.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guisample/checkmark.png")));
+            testFileCheckmark.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/checkmark.png")));
         }
         catch(Exception e)
         {
@@ -1000,7 +999,7 @@ public class Combined extends javax.swing.JFrame {
         {
             String filename = openDirectory();
             trainingInputTextField.setText(filename);
-            trainingInputCheckmark.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guisample/checkmark.png")));
+            trainingInputCheckmark.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/checkmark.png")));
         }
         catch(Exception e)
         {
@@ -1022,7 +1021,7 @@ public class Combined extends javax.swing.JFrame {
         {
             String filename = openDirectory();
             trainingOutputTextField.setText(filename);
-            trainingOutputCheckmark.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guisample/checkmark.png")));
+            trainingOutputCheckmark.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/checkmark.png")));
         }
         catch(Exception e)
         {
