@@ -15,16 +15,17 @@ class TextFieldListener extends KeyAdapter {
     
     @Override
     public void keyReleased(KeyEvent ke) {
+        try{
         String typed = text.getText();
         slider.setValue(0);
-        if(!typed.matches("\\d+") || typed.length() > 3) {
-                return;
-        }
+        //if(!typed.matches("\\d+") || typed.length() > 3) {
+          //      return;
+        //}
         
         text.setEnabled(true);
         int testValTF = Integer.parseInt(text.getText());
         if((testValTF < slider.getMinimum()) || (testValTF > slider.getMaximum())){
-            slider.setEnabled(false);
+            //slider.setEnabled(false);
             //text.setEnabled(true);
         } else {
             slider.setEnabled(true);
@@ -32,5 +33,10 @@ class TextFieldListener extends KeyAdapter {
             slider.setValue(value);
             //text.setEnabled(false);
         }
+    }
+    catch(Exception e)
+    {
+        text.setText(slider.getValue() + "");
+    }
     }
 }
