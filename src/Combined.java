@@ -916,8 +916,7 @@ public class Combined extends javax.swing.JFrame {
                     
                     if (currentMethod == 0) { //scap
                         list.add("-n="+scapNSlider.getValue());
-			if(!scapLValue.isEnabled())
-                            list.add("-L="+scapLValue.getValue());
+                        list.add("-L="+scapLValue.getValue());
                     }
                     
                     if (generateSpreadsheet)
@@ -941,8 +940,7 @@ public class Combined extends javax.swing.JFrame {
                     
                     if (currentMethod == 0) { //scap
                         list.add("-n="+scapNSlider.getValue());
-                        if(!scapLValue.isEnabled())
-                            list.add("-L="+scapLValue.getValue());
+                        list.add("-L="+scapLValue.getValue());
                     } else { //burrows
                         list.add("-n="+burrowsNSlider.getValue());
                         list.add("-tokenfile="+tokenFileTextField.getText());
@@ -1102,6 +1100,12 @@ try
 
     private void clearBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearBtnMouseClicked
         resultsTextArea.setText("");
+        File toDelete = new File("results.xls");
+        if(toDelete.exists())
+        {
+            toDelete.delete();
+            openSpreadsheet.setEnabled(false);
+        }
     }//GEN-LAST:event_clearBtnMouseClicked
 
     private void methodTabbedPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_methodTabbedPaneStateChanged
@@ -1183,6 +1187,11 @@ try
             
             inputGobbler.start();
             errorGobbler.start();
+            
+            while(process.isAlive())
+            {
+                //do nothing
+            }
 
         } catch (Throwable t) {
         }
