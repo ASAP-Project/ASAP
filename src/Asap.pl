@@ -2,7 +2,6 @@
 # Title:   Asap
 # Authors: Ethan Hill, Jacob Siegers, Matthew Tennyson
 # Date:    11 April 2014
-# Version: 1.0.4
 ################################################################################
 
 use strict;
@@ -11,7 +10,7 @@ use warnings;
 use Console;
 use Directory;
 use File;
-use Strip;
+use Anonymize;
 
 use Burrows;
 use Scap;
@@ -122,9 +121,7 @@ if($properties{train}) {
         my $file = $1;
         my $outputFile = $properties{outputdir} . ($properties{outputdir} =~ /\/$/ ? '' : '/') . $file;
         my $contents = File->readContents($properties{doc}, ':raw');
-        Strip->removeCComments($contents);
-        Strip->removeCPPComments($contents);
-        Strip->removeStringLiterals($contents);
+        Anonymize->stripComments($contents);
         File->writeContents($outputFile, ':raw', $contents);
     } elsif(defined $properties{inputdir}) {
         $properties{inputdir} =~ s/[\\:]/\//g;
@@ -133,9 +130,7 @@ if($properties{train}) {
         my @files = Directory->getFiles($properties{inputdir}, 0);
         foreach my $file (@files) {
             my $contents = File->readContents($inputDir . $file, ':raw');
-            Strip->removeCComments($contents);
-            Strip->removeCPPComments($contents);
-            Strip->removeStringLiterals($contents);
+            Anonymize->stripComments($contents);
             File->writeContents($outputDir . $file, ':raw', $contents);
         }
     }

@@ -1,1 +1,0 @@
-public class doc1 {	public static void main(String[] args) {		int x=1;		while(x<10) {			System.out.print(x);			x++;		}	}}public class doc2 {	public static void main(String[] args) {		for(int x=1; x<10; x++) {			System.out.print(x);		}	}}public class doc3 {	public static void main(String[] args) {		System.out.println("Hello!");	}}

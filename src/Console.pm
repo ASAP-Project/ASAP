@@ -2,9 +2,8 @@ package Console;
 
 ################################################################################
 # Title:   Console
-# Authors: Ethan Hill
+# Authors: Ethan Hill, Matthew Tennyson
 # Date:    22 January 2014
-# Version: 1.0.0
 ################################################################################
 
 use strict;
@@ -14,6 +13,8 @@ my $verbose = 0;
 my $quiet = 0;
 my $debug = 0;
 my $suppress = 0;
+
+$|=1; #forces a flush right away after every write or print
 
 ################################################################################
 # Subroutine: printMessage

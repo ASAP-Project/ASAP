@@ -4,7 +4,6 @@ package Directory;
 # Title:   Directory
 # Authors: Ethan Hill
 # Date:    14 February 2014
-# Version: 1.0.2
 ################################################################################
 
 use strict;

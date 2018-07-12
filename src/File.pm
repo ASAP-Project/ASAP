@@ -4,7 +4,6 @@ package File;
 # Title:   File
 # Authors: Ethan Hill
 # Date:    22 January 2014
-# Version: 1.0.0
 ################################################################################
 
 use strict;

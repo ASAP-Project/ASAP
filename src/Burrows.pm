@@ -2,9 +2,8 @@ package Burrows;
 
 ################################################################################
 # Title:   Burrows
-# Authors: Ethan Hill, Justin Sassine, Jacob Siegers
+# Authors: Ethan Hill, Justin Sassine, Jacob Siegers, Matthew Tennyson
 # Date:    4 April 2014
-# Version: 1.0.5
 ################################################################################
 
 use strict;
@@ -16,7 +15,7 @@ use Directory;
 use File;
 use Validate;
 use Report;
-use Strip;
+use Anonymize;
 
 ################################################################################
 # Subroutine: train
@@ -57,11 +56,11 @@ sub train {
 	my @extensions = qw(h c cpp java H C CPP JAVA);
 	my @keywords = File->readContents($keywordFile);
 	chomp @keywords;
-#	my %tokens = Burrows->generateTokens(@keywords);        # Select only one of these (standard)
-	my %tokens = Burrows->generateFixedJavaTokens();        # Select only one of these
+	my %tokens = Burrows->generateTokens(@keywords);        # Select only one of these (standard)
+#	my %tokens = Burrows->generateFixedJavaTokens();        # Select only one of these
 #	my %tokens = Burrows->generateFixedCPPTokens();         # Select only one of these
     my $keywordsRegex = Burrows->makeKeywordsRegex(@keywords);
-    my $zettairCommand = "\"../resource/zet\" -i -f \"$outputDirectory/index/index\"";
+    my $zettairCommand = "\"res/zet\" -i -f \"$outputDirectory/index/index\"";
     my $fileCount = 0;
 	foreach my $subDirectory (@subDirectories) {
 		Console->printVerbose("Working on $subDirectory...\n");
@@ -126,14 +125,14 @@ sub query {
     $fileCount =~ s/^fileCount=(\d+)$/$1/;
     my @keywords = File->readContents($keywordFile);
     chomp @keywords;
-#	my %tokens = Burrows->generateTokens(@keywords);        # Select only one of these (standard)
-	my %tokens = Burrows->generateFixedJavaTokens();        # Select only one of these
+	my %tokens = Burrows->generateTokens(@keywords);        # Select only one of these (standard)
+#	my %tokens = Burrows->generateFixedJavaTokens();        # Select only one of these
 #	my %tokens = Burrows->generateFixedCPPTokens();         # Select only one of these
     my $keywordsRegex = Burrows->makeKeywordsRegex(@keywords);
     Console->printVerbose("Tokenizing query file $inputFile\n");
     my @windowedContents = Burrows->tokenizeFile($inputFile, $ngramSize, $keywordsRegex, undef, %tokens);
     File->writeContents("$inputDirectory/index/query.temp.0", undef, join(" ", @windowedContents));
-    my $zettairCommand = "\"../resource/zet\" --okapi -f \"$inputDirectory/index/index\" -n $fileCount --query-list=\"$inputDirectory/index/query.temp.0\"";
+    my $zettairCommand = "\"res/zet\" --okapi -f \"$inputDirectory/index/index\" -n $fileCount --query-list=\"$inputDirectory/index/query.temp.0\"";
     my $buffer;
     Console->printVerbose("Running zettair search engine query\n");
     my $result = scalar run(command => $zettairCommand, buffer => \$buffer);
@@ -261,8 +260,8 @@ sub leaveOneOutExperiment {
 	my @extensions = qw(h c cpp java H C CPP JAVA);
 	my @keywords = File->readContents($keywordFile);
 	chomp @keywords;
-#	my %tokens = Burrows->generateTokens(@keywords);        # Select only one of these (standard)
-	my %tokens = Burrows->generateFixedJavaTokens();        # Select only one of these
+	my %tokens = Burrows->generateTokens(@keywords);        # Select only one of these (standard)
+#	my %tokens = Burrows->generateFixedJavaTokens();        # Select only one of these
 #	my %tokens = Burrows->generateFixedCPPTokens();         # Select only one of these
     my $keywordsRegex = Burrows->makeKeywordsRegex(@keywords);
     my (undef, undef, $fileCount) = File->readContents("$outputDirectory/index/index.meta.0");
@@ -270,7 +269,7 @@ sub leaveOneOutExperiment {
     $fileCount =~ s/^fileCount=(\d+)$/$1/;
     --$fileCount;
     mkdir $outputDirectory . "/index" unless -e $outputDirectory . "/index";
-    my $zettairCommand = "\"../resource/zet\" -i -f \"$outputDirectory/index/index\"";
+    my $zettairCommand = "\"res/zet\" -i -f \"$outputDirectory/index/index\"";
     
     foreach my $subDirectory (@subDirectories) {
         $zettairCommand .= " \"$outputDirectory/$subDirectory/$subDirectory.trec\"";
@@ -348,14 +347,10 @@ sub tokenizeFile {
 sub anonymizeContents {
 	if(defined wantarray) {
 		my $contents = $_[1];
-		$contents = Strip->removeCComments($contents);
-		$contents = Strip->removeCPPComments($contents);
-		$contents = Strip->removeStringLiterals($contents);
+		$contents = Anonymize->stripComments($contents);
 		return $contents;
 	} else {
-		Strip->removeCComments($_[1]);
-		Strip->removeCPPComments($_[1]);
-		Strip->removeStringLiterals($_[1]);
+		Anonymize->stripComments($_[1]);
 	}
 	return 1;
 }
@@ -400,7 +395,7 @@ sub alignWindow {
 	warn "Window size is undefined" and return unless defined $windowSize;
 	warn "Window size is invalid" and return unless $windowSize =~ /^[1-9]\d*$/;
 	my @windowedContents;
-	for(my $i = 0; $i < $#tokenizedContents - $windowSize; $i++) {
+	for(my $i = 0; $i < $#tokenizedContents - $windowSize + 2; $i++) {
 		my $window = "";
 		for(my $j = 0; $j < $windowSize; $j++) {
 			$window .= $tokenizedContents[$i + $j];
@@ -661,7 +656,7 @@ sub makeKeywordsRegex {
 	my (@keywords) = @_[1..$#_];
     warn "Keywords are undefined" and return unless @keywords;
 	my $keywordsRegex;
-	foreach my $keyword (sort{length $b <=> length $a} @keywords) {
+	foreach my $keyword (@keywords) { # (sort{length $b <=> length $a} @keywords) {
 		$keywordsRegex .= '|' if defined $keywordsRegex;
 		if($keyword =~ /^\w+$/) {
 			$keywordsRegex .= '\\b' . $keyword . '\\b';

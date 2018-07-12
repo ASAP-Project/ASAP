@@ -2,9 +2,8 @@ package Scap;
 
 ################################################################################
 # Title:   Scap
-# Authors: Ethan Hill, Justin Sassine
+# Authors: Ethan Hill, Justin Sassine, Matthew Tennyson
 # Date:    11 April 2014
-# Version: 1.0.4
 ################################################################################
 
 use strict;
@@ -229,7 +228,6 @@ sub kFoldExperiment {
 
 sub leaveOneOutExperiment {
     my ($inputDirectory, $ngramSize, $ngramLimit) = @_[1..$#_];
-    mkdir "experiment/test" or warn "\"experiment/test\" failed to be made" and return;
     mkdir "experiment/train" or warn "\"experiment/train\" failed to be made" and return;
     my $outputDirectory = "experiment/train";
     Console->printDebug(">>>>TRAINING...\n");
@@ -240,74 +238,104 @@ sub leaveOneOutExperiment {
     Console->printDebug(">>>>GETTING SUB-DIRECTORIES FROM $inputDirectory...\n");
     my @subDirectories = Directory->getSubDirectories($inputDirectory);
 	warn "Input directory $inputDirectory does not contain any sub-directories" and return unless @subDirectories;
+
+    #create n-grams from each author's concatenated files (which were created during training)
     my %authorNgrams = ();
+    my %authorNgrams_full = ();
     foreach my $subDirectory (@subDirectories) {
+        Console->printVerbose("Creating author profile for $subDirectory...\n");
         my $ngramObject = Text::Ngrams->new(type => 'byte', windowsize => $ngramSize);
         $ngramObject->process_files("$outputDirectory/$subDirectory/$subDirectory.scap");
         my %ngrams = $ngramObject->get_ngrams(orderby => 'frequency', onlyfirst => $ngramLimit, spartan => 1);
+        my %ngrams_full = $ngramObject->get_ngrams(orderby => 'frequency', spartan => 1);
         $authorNgrams{$subDirectory} = \%ngrams;
+        $authorNgrams_full{$subDirectory} = \%ngrams_full;
     }
+    print "\n";
+
 	my @extensions = qw(h c cpp java H C CPP JAVA);
-	foreach my $subDirectory (@subDirectories) {
-        my $outputSubDirectory = $outputDirectory . '/' . $subDirectory;
-		mkdir $outputSubDirectory unless -e $outputSubDirectory;
-        mkdir "experiment/test/$subDirectory";
-        Console->printDebug(">>>>GETTING FILES FROM $subDirectory...\n");
+	foreach my $subDirectory (@subDirectories)
+    {
+        #get list of file names
 		my @files = Directory->getFiles($inputDirectory . '/' . $subDirectory, 0, @extensions);
 		warn "Sub-directory $subDirectory does not contain any matching files" and next unless @files;
-        Console->printDebug(">>>>GETTING FULL FILES FROM $subDirectory...\n");
+
+        #get list of full file paths
 		my @fullFiles = Directory->getFiles($inputDirectory . '/' . $subDirectory, 1, @extensions);
-        for(my $i = 0; $i < @files; ++$i) {
-            my @looFiles = @fullFiles;
-            Console->printDebug(">>>>SPLICING FILES...\n");
-            splice(@looFiles, $i, 1);
-            Console->printDebug(">>>>GETTING JOINED CONTENTS...\n");
-            my $joinedContent = File->joinContents("", ":raw", @looFiles);
-            Console->printVerbose("Creating concatenated file $outputSubDirectory/$subDirectory.scap with $files[$i] omitted\n");
-            File->writeContents($outputSubDirectory . '/' . $subDirectory . '.scap', ':raw', $joinedContent);
-            {   # manual update of author ngrams
+
+        #loop through each individual file in the directory
+        for(my $i = 0; $i < @files; ++$i)
+        {
+            Console->printVerbose("Converting $files[$i] to n-grams...\n");
             my $ngramObject = Text::Ngrams->new(type => 'byte', windowsize => $ngramSize);
-            $ngramObject->process_files($outputSubDirectory . '/' . $subDirectory . '.scap');
-            my %ngrams = $ngramObject->get_ngrams(orderby => 'frequency', onlyfirst => $ngramLimit, spartan => 1);
-            %{$authorNgrams{$subDirectory}} = %ngrams;
-            }
-            Console->printDebug(">>>>WRITING QUERY FILE $files[$i]...\n");
-            File->writeContents("experiment/test/$subDirectory/$files[$i]", ':raw', scalar File->readContents($fullFiles[$i], ':raw'));
+            $ngramObject->process_files($fullFiles[$i]);
+            my %filengrams = $ngramObject->get_ngrams(orderby => 'frequency', onlyfirst => $ngramLimit, spartan => 1);
+            my %filengrams_full = $ngramObject->get_ngrams(orderby => 'frequency', spartan => 1);
+
             my %scores = ();
-            print "Querying $files[$i]...\n";
-            {   # manual query
-            my $ngramObject = Text::Ngrams->new(type => 'byte', windowsize => $ngramSize);
-            $ngramObject->process_files("experiment/test/$subDirectory/$files[$i]");
-            my %ngrams = $ngramObject->get_ngrams(orderby => 'frequency', onlyfirst => $ngramLimit, spartan => 1);
-            foreach my $author (keys %authorNgrams) {
-                my $subDirectoryScore = 0;
-                if(scalar keys %{$authorNgrams{$author}} <= scalar keys %ngrams) {
-                    foreach(keys %{$authorNgrams{$author}}) {
-                        $subDirectoryScore++ if exists $ngrams{$_};
-                    }
-                } else {
-                    foreach(keys %ngrams) {
-                        $subDirectoryScore++ if exists $authorNgrams{$author}->{$_};
-                    }
+            print "Omitting $files[$i] from $subDirectory profile...\n";
+
+            #remove the query file from the corresponding author profile for the "leave-one-out" experiment
+            my $hashref = $authorNgrams_full{$subDirectory};
+            my %temp = %$hashref;
+
+            foreach my $key (keys %temp)
+            {
+                if(exists $filengrams_full{$key})
+                {
+                    $temp{$key} -= $filengrams_full{$key};
+                    if($temp{$key}<=0) { delete $temp{$key}; }
                 }
-                $scores{$author} = $subDirectoryScore;
             }
+            
+            #retain only the most-frequent n-grams
+            my $count = 0;
+            my %tempprofile = (); #this will be the author's profile with the file omitted
+            foreach my $key (sort {$temp{$b} <=> $temp{$a}} keys %temp)
+            {
+                $tempprofile{$key} = $temp{$key};
+                if(++$count==$ngramLimit) { last; }
             }
-            Console->printDebug(">>>>FINDING ATTRIBUTED AUTHOR...\n");
+            
+            #compare the file to the profile
+            print "Comparing $files[$i] to $subDirectory... ";
+
+            my %union = ();
+            my %isect = ();
+            foreach my $e (keys %filengrams, keys %tempprofile) { $union{$e}++ && $isect{$e}++ }
+
+            print "found ", scalar(keys %isect), " n-grams in common.\n";
+            $scores{$subDirectory} = scalar(keys %isect);
+
+            #compare the file to the rest of the author profiles
+            foreach my $author (keys %authorNgrams)
+            {
+                if($author ne $subDirectory)
+                {
+                    print "Comparing $files[$i] to $author... ";
+                    
+                    %union = ();
+                    %isect = ();
+
+                    my $profile = $authorNgrams{$author};
+
+                    #compare the file to the profile
+                    foreach my $e (keys %filengrams, keys %$profile) { $union{$e}++ && $isect{$e}++ }
+                    print "found ", scalar(keys %isect), " n-grams in common.\n";
+                    $scores{$author} = scalar(keys %isect);
+                }
+            }
+
             my $attributedAuthor = (sort{$scores{$b} <=> $scores{$a}} keys %scores)[0];
+            print "Attributed author: $attributedAuthor\n\n";
+
             $matches++ if $subDirectory eq $attributedAuthor;
             push(@{$trials{$subDirectory}}, {file => $files[$i], author => $subDirectory, attributed => $attributedAuthor, scores => \%scores});
-			print "\n";
-            Console->printDebug(">>>>UNLINKING FILE $files[$i]...\n");
-            unlink "experiment/test/$subDirectory/$files[$i]";
         }
         $total += @files;
-        Console->printDebug(">>>>REMOVING $subDirectory...\n");
-        Directory->removeDirectory("experiment/test/$subDirectory");
 	}
     print "$matches files out of $total correctly attributed (" . ($matches / $total) * 100 . "%)\n";
-    Console->printDebug(">>>>REMOVING /test and /train...\n");
-    Directory->removeDirectory("experiment/test", 1);
+    Console->printDebug(">>>>REMOVING /train...\n");
     Directory->removeDirectory("experiment/train", 1);
     Console->printDebug(">>>>DONE.\n");
     return ($matches, $total, \%trials, 1);

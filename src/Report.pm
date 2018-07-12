@@ -4,7 +4,6 @@ package Report;
 # Title:   Report
 # Authors: Ethan Hill
 # Date:    21 February 2014
-# Version: 1.0.1
 ################################################################################
 
 use strict;
